@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:replace="common/header"></th:block>
+    <title>Main Page</title>
+</head>
+<body>
+    <th:block th:replace="common/navbar"></th:block>
+    <div class="container p-3 my-3 border">
+        <p class="text-center">게시판</p>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <h2>당신의 username : </h2>
+        <p sec:authentication="principal.username">username</p>
+    </div>
+    <div class="container text-center" sec:authorize="!isAuthenticated()">
+        <a type="button" class="btn btn-outline-primary" th:href="@{/auth/login}">로그인</a>
+        <a type="button" class="btn btn-outline-secondary" th:href="@{/auth/join}">회원가입</a>
+        <a type="button" class="btn btn-outline-success" th:href="@{/board}">Primary</a>
+    </div>
+    <div class="container text-center" sec:authorize="isAuthenticated()">
+        <a type="button" class="btn btn-outline-primary" th:href="@{/board/list}">게시판이동</a>
+        <a type="button" class="btn btn-outline-secondary" th:href="@{/logout}">로그아웃</a>
+    </div>
+    <th:block th:replace="common/footer"></th:block>
+</body>
+</html>

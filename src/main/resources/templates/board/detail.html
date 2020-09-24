@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:replace="common/header"></th:block>
+    <title>상세보기</title>
+</head>
+<body>
+<th:block th:replace="common/navbar"></th:block>
+<div class="container my-5 ">
+    <!--<p>principal : <span sec:authentication="principal"/></p>
+    <p>principal.username : <span sec:authentication="principal.username"/></p>
+    <p>principal.password : <span sec:authentication="principal.password"/></p>
+    <p>principal.name : <span sec:authentication="principal.name"/></p>
+    <p>principal.role : <span sec:authentication="principal.role"/></p>
+    <p>principal.createDate : <span sec:authentication="principal.createDate"/></p>-->
+
+<!--    <p th:text="${#authentication.name}">dd</p>-->
+    <div th:if="${#authentication.name == board.user.username}">
+        <a th:href="@{'/board/post/'+${board.id}}" class="btn btn-warning">수정하기</a>
+        <a id="btn-delete" class="btn btn-danger">삭제하기</a>
+    </div>
+    <form th:object="${board}">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label>제목 : </label>
+            <input type="text" class="form-control" th:field="*{title}" aria-describedby="emailHelp" readonly>
+        </div>
+        <div class="form-group">
+            <label>내용 : </label>
+            <textarea class="form-control" th:field="*{content}" rows="3" readonly></textarea>
+        </div>
+        <a id="btn-write" class="btn btn-primary">Submit</a>
+        <a class="btn btn-secondary" th:href="@{/board/list}" onclick="history.back()">돌아가기</a>
+    </form>
+</div>
+<script th:src="@{/js/auth.js}"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<th:block th:replace="common/footer"></th:block>
+</body>
+</html>

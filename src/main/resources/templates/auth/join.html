@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="common/header"></th:block>
+    <title>회원가입</title>
+</head>
+<body>
+<th:block th:replace="common/navbar"></th:block>
+<div class="container my-5">
+    <form>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" id="username" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">유저네임은 적어도 4자 이상이어야 합니다.</small>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" id="name">
+        </div>
+        <a id="btn-join" class="btn btn-primary">Submit</a>
+    </form>
+</div>
+<script th:src="@{/js/auth.js}"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<th:block th:replace="common/footer"></th:block>
+</body>
+</html>

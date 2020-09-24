@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="common/header"></th:block>
+    <title>로그인</title>
+</head>
+<body>
+<th:block th:replace="common/navbar"></th:block>
+<div class="container my-5">
+    <form th:action="@{/auth/loginPost}" method="post">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <button type="submit" id="btn-login" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<th:block th:replace="common/footer"></th:block>
+</body>
+</html>
