@@ -19,6 +19,14 @@
         <a th:href="@{'/board/post/'+${board.id}}" class="btn btn-warning">수정하기</a>
         <a id="btn-delete" class="btn btn-danger">삭제하기</a>
     </div>
+    <br/>
+    <div class="card">
+        <div class="card-header">
+            글번호 : <span th:text="${board.id}"><i>id</i></span>
+            작성자 : <span th:text="${board.user.username}"><i>writer</i></span>
+        </div>
+    </div>
+    <hr />
     <form th:object="${board}">
         <input type="hidden" th:field="*{id}">
         <div class="form-group">
@@ -29,9 +37,36 @@
             <label>내용 : </label>
             <textarea class="form-control" th:field="*{content}" rows="3" readonly></textarea>
         </div>
-        <a id="btn-write" class="btn btn-primary">Submit</a>
-        <a class="btn btn-secondary" th:href="@{/board/list}" onclick="history.back()">돌아가기</a>
     </form>
+
+    <div class=" my-3">
+        <a class="btn btn-secondary" th:href="@{/board/list}" onclick="history.back()">돌아가기</a>
+    </div>
+    <br />
+    <hr>
+
+    <div class="container">
+        <div>
+            댓글 <span th:text="${#lists.size(board.replys)}"></span>
+        </div>
+        <div class="my-2" th:each=" reply : ${board.replys}">
+            <span th:text="${reply.user.username}">작성자</span> &nbsp; &nbsp; <span th:text="${#dates.format(reply.writeDate,'yyyy-MM-dd HH:mm')}">작성시간</span>
+            <p th:text="${reply.content}">내용</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <label>comment</label>
+        <form>
+            <div class="input-group">
+                <input type="hidden"/>
+                <input type="text" class="form-control" id="reply-content" placeholder="댓글을 입력하세요.">
+                <span class="input-group-btn"><a class="btn btn-default" id="btn-reply-write">등록</a></span>
+            </div>
+        </form>
+    </div>
+
+
 </div>
 <script th:src="@{/js/auth.js}"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>

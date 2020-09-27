@@ -12,6 +12,9 @@ let index = {
         $("#btn-update").on("click",()=>{
             this.update();
         });
+        $("#btn-reply-write").on("click",()=>{
+            this.replyWrite();
+        });
     },
 
     join:function() {
@@ -60,6 +63,12 @@ let index = {
 
     delete:function(){
 
+        let a = confirm("정말 삭제하시겠습니까?")
+
+        if(!a) {
+            return false;
+        }
+
         let id = $("#id").val();
 
         $.ajax({
@@ -90,6 +99,26 @@ let index = {
         }).done(function(resp){
             alert("수정이 완료되었습니다");
             location.href="/board/list";
+        }).fail(function(err){
+            alert(JSON.stringify(err));
+        });
+    },
+
+    replyWrite:function() {
+
+        let id = $("#id").val();
+
+        let data = {
+            content : $("#reply-content").val()
+        };
+
+        $.ajax({
+            type:"post",
+            url:`/api/board/${id}/reply`,
+            data:JSON.stringify(data),
+            contentType:"application/json; charset=utf-8"
+        }).done(function(resp) {
+            location.href=`/board/${id}`;
         }).fail(function(err){
             alert(JSON.stringify(err));
         });

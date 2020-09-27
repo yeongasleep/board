@@ -31,15 +31,5 @@ public class User {
     @CreationTimestamp
     private Timestamp createDate;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", role=" + role +
-                ", createDate=" + createDate +
-                '}';
-    }
+
 }

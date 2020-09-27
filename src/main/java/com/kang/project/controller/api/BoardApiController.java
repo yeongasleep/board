@@ -2,6 +2,7 @@ package com.kang.project.controller.api;
 
 import com.kang.project.config.PrincipalDetail;
 import com.kang.project.model.Board;
+import com.kang.project.model.Reply;
 import com.kang.project.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,5 +32,10 @@ public class BoardApiController {
         boardService.update(id, board);
     }
 
+    @PostMapping("/api/board/{id}/reply")
+    public void replyWrite(@PathVariable Long id, @RequestBody Reply reply,
+                           @AuthenticationPrincipal PrincipalDetail principal) {
+        boardService.replyWrite(id,reply,principal.getUser());
+    }
 
 }
